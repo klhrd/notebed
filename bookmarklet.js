@@ -24,10 +24,9 @@
     notebedContainer.innerHTML=
         `
             <div id="notebed-nav">
-                <span style="margin-right: auto; padding: 3px; ">NOTEBED</span>
+                <span style="margin-right: auto; padding: 3px; pointer-events: none; user-select: none;">ℕ𝕆𝕋𝔼𝔹𝔼𝔻</span>
                 <button class="notebed-nav-btn" id="notebed-nav-btn-delete"><span class="material-symbols-outlined">delete</span></button>
                 <button class="notebed-nav-btn" id="notebed-nav-btn-opacity"><span class="material-symbols-outlined">visibility</span></button>
-                <button class="notebed-nav-btn" id="notebed-nav-btn-drag"><span class="material-symbols-outlined">open_with</span></button>
                 <button class="notebed-nav-btn" id="notebed-nav-btn-close"><span class="material-symbols-outlined">close</span></button>
             </div>
             <div id="notebed-note" contenteditable="true">
@@ -39,7 +38,7 @@
 
     // addEventListener =====================================================================================================================
     const notebedNote=document.getElementById('notebed-note');
-    const notebedDragBtn=document.getElementById('notebed-nav-btn-drag');
+    const notebedDragger=document.getElementById('notebed-nav');
     const notebedOpacityBtn=document.getElementById('notebed-nav-btn-opacity')
     const notebedDeleteBtn=document.getElementById('notebed-nav-btn-delete')
     const notebedCloseBtn=document.getElementById('notebed-nav-btn-close')
@@ -49,12 +48,12 @@
     let offsetX=0;
     let offsetY=0;
 
-    notebedDragBtn.addEventListener('mousedown',(e)=>
+    notebedDragger.addEventListener('mousedown',(e)=>
     {
         isDragging=true;
         offsetX=e.clientX-notebedContainer.offsetLeft;
         offsetY=e.clientY-notebedContainer.offsetTop;
-        notebedDragBtn.style.cursor='grabbing';
+        notebedDragger.style.cursor='grabbing';
     });
 
     document.addEventListener('mousemove',(e)=>
@@ -67,27 +66,30 @@
     document.addEventListener('mouseup',()=>
     {
         isDragging=false;
-        notebedDragBtn.style.cursor='grab';
+        notebedDragger.style.cursor='grab';
     });
 
     // opacity
     let isOpaque=true;
-    notebedOpacityBtn.addEventListener('click',()=>
+    notebedOpacityBtn.addEventListener('click',(e)=>
     {
+        e.stopPropagation();
         isOpaque=!isOpaque;
         updateNotebedOpacity();
     });
 
     // delete
-    notebedDeleteBtn.addEventListener('click',()=>
+    notebedDeleteBtn.addEventListener('click',(e)=>
     {
+        e.stopPropagation();
         notebedNote.innerText="";
         updateNotebedNote();
     });
 
     // close
-    notebedCloseBtn.addEventListener('click',()=>
+    notebedCloseBtn.addEventListener('click',(e)=>
     {
+        e.stopPropagation();
         notebedContainer.remove();
     });
 
