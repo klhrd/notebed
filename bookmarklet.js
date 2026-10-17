@@ -23,7 +23,7 @@
         `
             <div id="notebed-nav">
                 <button class="notebed-nav-btn" id="notebed-nav-btn-drag"><span class="material-symbols-outlined">open_with</span></button>
-                <button class="notebed-nav-btn"><span class="material-symbols-outlined">visibility</span></button>
+                <button class="notebed-nav-btn" id="notebed-nav-btn-opacity"><span class="material-symbols-outlined">visibility</span></button>
                 <button class="notebed-nav-btn"><span class="material-symbols-outlined">close_fullscreen</span></button>
                 <button class="notebed-nav-btn" id="notebed-nav-btn-close"><span class="material-symbols-outlined">close</span></button>
             </div>
@@ -37,6 +37,7 @@
     // addEventListener =====================================================================================================================
     const notebedNote=document.getElementById('notebed-note');
     const notebedDragBtn=document.getElementById('notebed-nav-btn-drag');
+    const notebedOpacityBtn=document.getElementById('notebed-nav-btn-opacity')
     const notebedCloseBtn=document.getElementById('notebed-nav-btn-close')
 
     //drag
@@ -65,16 +66,30 @@
         notebedDragBtn.style.cursor='grab';
     });
 
+    // opacity
+    let isOpaque=true;
+    notebedOpacityBtn.addEventListener('click',()=>
+    {
+        isOpaque=!isOpaque;
+        updateNotebedOpacity();
+    })
+
     // close
     notebedCloseBtn.addEventListener('click',()=>
     {
         notebedContainer.remove();
     })
 
-
     // note input
-    updateNotebedNoteStatus();
     notebedNote.addEventListener('input',updateNotebedNoteStatus);
+
+    // init====================================================================================================================================================================
+    function init()
+    {
+        updateNotebedNoteStatus();
+        updateNotebedOpacity();
+    }
+
     function updateNotebedNoteStatus()
     {
         if(notebedNote.textContent.trim()==="")
@@ -86,4 +101,20 @@
             notebedNote.classList.remove('notebed-note-empty');
         }
     }
+
+    function updateNotebedOpacity()
+    {
+        if(isOpaque)
+        {
+            notebedContainer.style.opacity=1;
+            notebedOpacityBtn.firstElementChild.textContent="visibility";
+        }
+        else
+        {
+            notebedContainer.style.opacity=0.5;
+            notebedOpacityBtn.firstElementChild.textContent="visibility_off";
+        }
+    }
+
+    init();
 })();
