@@ -25,7 +25,7 @@
                 <button class="notebed-nav-btn" id="notebed-nav-btn-drag"><span class="material-symbols-outlined">open_with</span></button>
                 <button class="notebed-nav-btn"><span class="material-symbols-outlined">visibility</span></button>
                 <button class="notebed-nav-btn"><span class="material-symbols-outlined">close_fullscreen</span></button>
-                <button class="notebed-nav-btn"><span class="material-symbols-outlined">close</span></button>
+                <button class="notebed-nav-btn" id="notebed-nav-btn-close"><span class="material-symbols-outlined">close</span></button>
             </div>
             <div id="notebed-note" contenteditable="true">
             </div>
@@ -36,19 +36,20 @@
 
     // addEventListener =====================================================================================================================
     const notebedNote=document.getElementById('notebed-note');
-    const notebedDragger=document.getElementById('notebed-nav-btn-drag');
+    const notebedDragBtn=document.getElementById('notebed-nav-btn-drag');
+    const notebedCloseBtn=document.getElementById('notebed-nav-btn-close')
 
     //drag
     let isDragging=false;
     let offsetX=0;
     let offsetY=0;
 
-    notebedDragger.addEventListener('mousedown',(e)=>
+    notebedDragBtn.addEventListener('mousedown',(e)=>
     {
         isDragging=true;
         offsetX=e.clientX-notebedContainer.offsetLeft;
         offsetY=e.clientY-notebedContainer.offsetTop;
-        notebedDragger.style.cursor='grabbing';
+        notebedDragBtn.style.cursor='grabbing';
     });
 
     document.addEventListener('mousemove',(e)=>
@@ -56,16 +57,20 @@
         if(!isDragging)return;
         notebedContainer.style.left=e.clientX-offsetX+'px';
         notebedContainer.style.top=e.clientY-offsetY+'px';
-        console.log(e.clientX-offsetX);
     });
 
     document.addEventListener('mouseup',()=>
     {
         isDragging=false;
-        notebedDragger.style.cursor='grab';
+        notebedDragBtn.style.cursor='grab';
     });
 
-    
+    // close
+    notebedCloseBtn.addEventListener('click',()=>
+    {
+        notebedContainer.remove();
+    })
+
 
     // note input
     updateNotebedNoteStatus();
