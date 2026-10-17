@@ -1,6 +1,7 @@
 (function()
 {
-    STORAGE_KEY="NOTEBED_NOTE_CONTENT";
+    STORAGE_KEY_CONTENT="NOTEBED_NOTE_CONTENT";
+    STORAGE_KEY_XYWH="NOTEBED_XYWH";
 
     // appeadChild ======================================================================================================================
 
@@ -67,6 +68,7 @@
     {
         isDragging=false;
         notebedDragger.style.cursor='grab';
+        saveNotebedXYWH();
     });
 
     // opacity
@@ -76,6 +78,7 @@
         e.stopPropagation();
         isOpaque=!isOpaque;
         updateNotebedOpacity();
+        saveNotebedXYWH();
     });
 
     // delete
@@ -83,7 +86,8 @@
     {
         e.stopPropagation();
         notebedNote.innerText="";
-        updateNotebedNote();
+        saveNotebedNote();
+        saveNotebedXYWH();
     });
 
     // close
@@ -91,20 +95,32 @@
     {
         e.stopPropagation();
         notebedContainer.remove();
+        saveNotebedXYWH();
     });
 
     // note input
-    notebedNote.addEventListener('input',updateNotebedNote);
+    notebedNote.addEventListener('input',()=>
+    {
+        saveNotebedNote();
+        saveNotebedXYWH();
+    });
 
     // init====================================================================================================================================================================
     function init()
     {
-        notebedNote.innerText=localStorage.getItem(STORAGE_KEY);
-        updateNotebedNote();
+        notebedNote.innerText=localStorage.getItem(STORAGE_KEY_CONTENT);
+        saveNotebedNote();
         updateNotebedOpacity();
+        
+        // load XYWH
+        const XYWH=JSON.parse(localStorage.getItem(STORAGE_KEY_XYWH));
+        notebedContainer.style.left=XYWH.x;
+        notebedContainer.style.top=XYWH.y;
+        notebedContainer.style.width=XYWH.w;
+        notebedContainer.style.height=XYWH.h;
     }
 
-    function updateNotebedNote()
+    function saveNotebedNote()
     {
         if(notebedNote.innerText.trim()==="")
         {
@@ -115,7 +131,7 @@
             notebedNote.classList.remove('notebed-note-empty');
         }
 
-        localStorage.setItem(STORAGE_KEY,notebedNote.innerText)
+        localStorage.setItem(STORAGE_KEY_CONTENT,notebedNote.innerText);
     }
 
     function updateNotebedOpacity()
@@ -130,6 +146,19 @@
             notebedContainer.style.opacity=0.5;
             notebedOpacityBtn.firstElementChild.textContent="visibility_off";
         }
+    }
+
+    function saveNotebedXYWH()
+    {
+        const XYWH=
+        {
+            x:notebedContainer.style.left,
+            y:notebedContainer.style.top,
+            w:notebedContainer.style.width,
+            h:notebedContainer.style.height,
+        };
+
+        localStorage.setItem(STORAGE_KEY_XYWH,JSON.stringify(XYWH));
     }
 
     init();
