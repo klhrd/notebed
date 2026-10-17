@@ -1,5 +1,7 @@
 (function()
 {
+    STORAGE_KEY="NOTEBED_NOTE_CONTENT";
+
     // appeadChild ======================================================================================================================
 
     // link
@@ -81,16 +83,17 @@
     })
 
     // note input
-    notebedNote.addEventListener('input',updateNotebedNoteStatus);
+    notebedNote.addEventListener('input',updateNotebedNote);
 
     // init====================================================================================================================================================================
     function init()
     {
-        updateNotebedNoteStatus();
+        notebedNote.textContent=localStorage.getItem(STORAGE_KEY);
+        updateNotebedNote();
         updateNotebedOpacity();
     }
 
-    function updateNotebedNoteStatus()
+    function updateNotebedNote()
     {
         if(notebedNote.textContent.trim()==="")
         {
@@ -100,6 +103,8 @@
         {
             notebedNote.classList.remove('notebed-note-empty');
         }
+
+        localStorage.setItem(STORAGE_KEY,notebedNote.textContent)
     }
 
     function updateNotebedOpacity()
