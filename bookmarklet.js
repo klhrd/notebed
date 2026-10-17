@@ -24,8 +24,10 @@
     notebedContainer.innerHTML=
         `
             <div id="notebed-nav">
-                <button class="notebed-nav-btn" id="notebed-nav-btn-drag"><span class="material-symbols-outlined">open_with</span></button>
+                <span style="margin-right: auto; padding: 3px; ">NOTEBED</span>
+                <button class="notebed-nav-btn" id="notebed-nav-btn-delete"><span class="material-symbols-outlined">delete</span></button>
                 <button class="notebed-nav-btn" id="notebed-nav-btn-opacity"><span class="material-symbols-outlined">visibility</span></button>
+                <button class="notebed-nav-btn" id="notebed-nav-btn-drag"><span class="material-symbols-outlined">open_with</span></button>
                 <button class="notebed-nav-btn" id="notebed-nav-btn-close"><span class="material-symbols-outlined">close</span></button>
             </div>
             <div id="notebed-note" contenteditable="true">
@@ -39,6 +41,7 @@
     const notebedNote=document.getElementById('notebed-note');
     const notebedDragBtn=document.getElementById('notebed-nav-btn-drag');
     const notebedOpacityBtn=document.getElementById('notebed-nav-btn-opacity')
+    const notebedDeleteBtn=document.getElementById('notebed-nav-btn-delete')
     const notebedCloseBtn=document.getElementById('notebed-nav-btn-close')
 
     //drag
@@ -73,13 +76,20 @@
     {
         isOpaque=!isOpaque;
         updateNotebedOpacity();
-    })
+    });
+
+    // delete
+    notebedDeleteBtn.addEventListener('click',()=>
+    {
+        notebedNote.innerText="";
+        updateNotebedNote();
+    });
 
     // close
     notebedCloseBtn.addEventListener('click',()=>
     {
         notebedContainer.remove();
-    })
+    });
 
     // note input
     notebedNote.addEventListener('input',updateNotebedNote);
