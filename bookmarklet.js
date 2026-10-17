@@ -1,5 +1,7 @@
 (function()
 {
+    // appeadChild ======================================================================================================================
+
     // link
     const link=document.createElement('link');
     link.rel='stylesheet';
@@ -20,7 +22,7 @@
     notebedContainer.innerHTML=
         `
             <div id="notebed-nav">
-                <button class="notebed-nav-btn"><span class="material-symbols-outlined">open_with</span></button>
+                <button class="notebed-nav-btn" id="notebed-nav-btn-drag"><span class="material-symbols-outlined">open_with</span></button>
                 <button class="notebed-nav-btn"><span class="material-symbols-outlined">visibility</span></button>
                 <button class="notebed-nav-btn"><span class="material-symbols-outlined">close_fullscreen</span></button>
                 <button class="notebed-nav-btn"><span class="material-symbols-outlined">close</span></button>
@@ -29,16 +31,46 @@
             </div>
         
         `;
-
-
     document.body.appendChild(notebedContainer);
 
 
-
+    // addEventListener =====================================================================================================================
     const notebedNote=document.getElementById('notebed-note');
-    updateNotebedNoteEmptyStatus();
-    notebedNote.addEventListener('input',updateNotebedNoteEmptyStatus);
-    function updateNotebedNoteEmptyStatus()
+    const notebedDragger=document.getElementById('notebed-nav-btn-drag');
+
+    //drag
+    let isDragging=false;
+    let offsetX=0;
+    let offsetY=0;
+
+    notebedDragger.addEventListener('mousedown',(e)=>
+    {
+        isDragging=true;
+        offsetX=e.clientX-notebedContainer.offsetLeft;
+        offsetY=e.clientY-notebedContainer.offsetTop;
+        notebedDragger.style.cursor='grabbing';
+    });
+
+    document.addEventListener('mousemove',(e)=>
+    {
+        if(!isDragging)return;
+        notebedContainer.style.left=e.clientX-offsetX+'px';
+        notebedContainer.style.top=e.clientY-offsetY+'px';
+        console.log(e.clientX-offsetX);
+    });
+
+    document.addEventListener('mouseup',()=>
+    {
+        isDragging=false;
+        notebedDragger.style.cursor='grab';
+    });
+
+    
+
+    // note input
+    updateNotebedNoteStatus();
+    notebedNote.addEventListener('input',updateNotebedNoteStatus);
+    function updateNotebedNoteStatus()
     {
         if(notebedNote.textContent.trim()==="")
         {

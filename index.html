@@ -10,8 +10,8 @@
     height: 200px;
     
     position: fixed;
-    left: 10px;
-    top: 10px;
+    left: 100px;
+    top: 200px;
     
     border: 0px solid #888888;
     border-radius: 6px;
@@ -23,6 +23,8 @@
     flex-direction: column;
     gap: 5px;
     padding: 5px;
+
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 #notebed-nav
@@ -43,8 +45,9 @@
     justify-content: center;
 
     background-color: #00000000;
-    height: 1.5rem;
-    width: 1.5rem;
+    user-select: none;
+    height: 1.6rem;
+    width: 1.6rem;
     border-radius: 50%;
 
     display: flex;
@@ -53,13 +56,17 @@
 }
 .notebed-nav-btn>span
 {
-    height: 0.8rem;
-    width: 0.8rem;
+    font-size: 20px;
 }
 
 .notebed-nav-btn:hover
 {
-    background-color: #88888850;
+    background-color: #88888830;
+}
+
+#notebed-nav-btn-drag
+{
+    cursor: grab;
 }
 
 #notebed-note
@@ -79,9 +86,10 @@
 
 #notebed-note.notebed-note-empty::before
 {
-    content: "empty";
+    content: "take notes here... ";
     cursor: text;
 
+    color: #00000080;
     position: absolute;
     left: 5px;
     top: 5px;
