@@ -26,7 +26,6 @@
             <div id="notebed-nav">
                 <button class="notebed-nav-btn" id="notebed-nav-btn-drag"><span class="material-symbols-outlined">open_with</span></button>
                 <button class="notebed-nav-btn" id="notebed-nav-btn-opacity"><span class="material-symbols-outlined">visibility</span></button>
-                <button class="notebed-nav-btn"><span class="material-symbols-outlined">close_fullscreen</span></button>
                 <button class="notebed-nav-btn" id="notebed-nav-btn-close"><span class="material-symbols-outlined">close</span></button>
             </div>
             <div id="notebed-note" contenteditable="true">
@@ -88,14 +87,14 @@
     // init====================================================================================================================================================================
     function init()
     {
-        notebedNote.textContent=localStorage.getItem(STORAGE_KEY);
+        notebedNote.innerText=localStorage.getItem(STORAGE_KEY);
         updateNotebedNote();
         updateNotebedOpacity();
     }
 
     function updateNotebedNote()
     {
-        if(notebedNote.textContent.trim()==="")
+        if(notebedNote.innerText.trim()==="")
         {
             notebedNote.classList.add('notebed-note-empty');
         }
@@ -104,7 +103,7 @@
             notebedNote.classList.remove('notebed-note-empty');
         }
 
-        localStorage.setItem(STORAGE_KEY,notebedNote.textContent)
+        localStorage.setItem(STORAGE_KEY,notebedNote.innerText)
     }
 
     function updateNotebedOpacity()
