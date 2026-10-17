@@ -2,20 +2,116 @@
 <html>
     <head>
         <meta charset="UTF-8">
+        <title>notebed</title>
+        <style>
+#notebed-container
+{
+    width: 200px;
+    height: 200px;
+    
+    position: fixed;
+    left: 10px;
+    top: 10px;
+    
+    border: 0px solid #888888;
+    border-radius: 6px;
+    background-color: #f0f8ff;
+    
+    z-index: 99999;
+    
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    padding: 5px;
+}
 
-        <title></title>
+#notebed-nav
+{
+    flex: 0 0 auto;
+
+    background-color: #f0f0f0;
+
+    display: flex;
+    gap: 10px;
+}
+
+.notebed-nav-btn
+{
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background-color: #00000000;
+    height: 1.5rem;
+    width: 1.5rem;
+    border-radius: 50%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.notebed-nav-btn>span
+{
+    height: 0.8rem;
+    width: 0.8rem;
+}
+
+.notebed-nav-btn:hover
+{
+    background-color: #88888850;
+}
+
+#notebed-note
+{
+    background-color: #f0f0f0;
+    height: 100%;
+
+    flex: 1 1 auto;
+
+    overflow-y: auto;
+    outline: none;
+
+    padding: 2px;
+
+    position: relative;
+}
+
+#notebed-note.notebed-note-empty::before
+{
+    content: "empty";
+    cursor: text;
+
+    position: absolute;
+    left: 5px;
+    top: 5px;
+
+    pointer-events: none;
+}
+
+
+        </style>
     </head>
     <body>
         <h1>TEST</h1>
         <p>yuehcdnckbhxwjmoafkhsohdntrueirdljcsmerniuvcnuxmzzeosfcgnnvcmewoxjfmcncmxe</p>
         <a href="
-        javascript:(function()
-        {
-            const s=document.createElement('script');
-            s.src='http://127.0.0.1:5500/bookmarklet.js';
-            document.body.appendChild(s);
-        })()">run</a>
+            javascript:(function()
+            {
+                const s=document.createElement('script');
+                s.src='http://127.0.0.1:5500/bookmarklet.js';
+                document.body.appendChild(s);
+            })();
+        ">run</a>
 
-        
+        <script>
+            window.addEventListener("load",
+                function()
+                {
+                    const s=document.createElement('script');
+                    s.src='http://127.0.0.1:5500/bookmarklet.js';
+                    document.body.appendChild(s);
+                });
+        </script>
     </body>
 </html>
