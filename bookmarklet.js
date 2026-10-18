@@ -1,5 +1,7 @@
 (function()
 {
+    if(document.getElementById('notebed-note'))return;
+
     STORAGE_KEY_CONTENT="NOTEBED_NOTE_CONTENT";
     STORAGE_KEY_XYWH="NOTEBED_XYWH";
 
@@ -15,7 +17,139 @@
     const style=document.createElement('style');
     style.textContent=
         `
-        
+body
+{
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: center;
+}
+
+#notebed-container
+{
+    width: 200px;
+    height: 200px;
+    
+    position: fixed;
+    left: 10px;
+    top: 10px;
+    
+    border: 0px solid #888888;
+    border-radius: 10px;
+    background-color: #f0f0f0;
+    
+    z-index: 99999;
+    
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    padding: 5px;
+
+    resize: both;
+    overflow: hidden;
+
+    min-width: 51px;
+    min-height: 25px;
+
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: left;
+}
+
+#notebed-nav
+{
+    flex: 0 0 auto;
+
+    background-color: #fafafa;
+    border-radius: 5px;
+    
+    display: flex;
+    justify-content: end;
+    align-items: center;
+
+    overflow: hidden;
+}
+
+#notebed-nav-title:hover
+{
+    cursor: grab;
+}
+
+.notebed-nav-btn
+{
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    background-color: #00000000;
+    user-select: none;
+    height: 1.6rem;
+    width: 1.6rem;
+    border-radius: 50%;
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.notebed-nav-btn>span
+{
+    font-size: 20px;
+}
+
+.notebed-nav-btn:hover
+{
+    background-color: #88888830;
+    cursor: pointer;
+}
+
+#notebed-nav-btn-drag
+{
+    cursor: grab;
+}
+
+#notebed-note
+{
+    border-radius: 5px;
+
+    background-color: #fafafa;
+    height: 100%;
+    
+    flex: 1 1 auto;
+
+    overflow-y: auto;
+    outline: none;
+
+    padding: 2px;
+
+    position: relative;
+
+}
+
+#notebed-note::-webkit-scrollbar{width: 12px;}
+#notebed-note::-webkit-scrollbar-button{display: none;}
+#notebed-note::-webkit-scrollbar-corner{display: none;}
+#notebed-note::-webkit-scrollbar-track{visibility: hidden;}
+#notebed-note::-webkit-scrollbar-thumb
+{
+    background-color: #e8e8e8;
+    border-radius: 6px;
+    border: 4px solid #00000000;
+    background-clip: padding-box;
+}
+#notebed-note::-webkit-scrollbar-thumb:hover
+{
+    background-color: #d8d8d8;
+}
+
+
+#notebed-note.notebed-note-empty::before
+{
+    content: "take notes here... ";
+    cursor: text;
+
+    color: #00000080;
+    position: absolute;
+
+    pointer-events: none;
+}
         `;
     document.head.appendChild(style);
 
@@ -25,7 +159,7 @@
     notebedContainer.innerHTML=
         `
             <div id="notebed-nav">
-                <span style="margin-right: auto; padding: 3px; pointer-events: none; user-select: none;">ℕ𝕆𝕋𝔼𝔹𝔼𝔻</span>
+                <span id="notebed-nav-title" style="margin-right: auto; padding: 3px; user-select: none;">ℕ𝕆𝕋𝔼𝔹𝔼𝔻</span>
                 <button class="notebed-nav-btn" id="notebed-nav-btn-delete"><span class="material-symbols-outlined">delete</span></button>
                 <button class="notebed-nav-btn" id="notebed-nav-btn-opacity"><span class="material-symbols-outlined">visibility</span></button>
                 <button class="notebed-nav-btn" id="notebed-nav-btn-close"><span class="material-symbols-outlined">close</span></button>
@@ -39,7 +173,7 @@
 
     // addEventListener =====================================================================================================================
     const notebedNote=document.getElementById('notebed-note');
-    const notebedDragger=document.getElementById('notebed-nav');
+    const notebedDragger=document.getElementById('notebed-nav-title');
     const notebedOpacityBtn=document.getElementById('notebed-nav-btn-opacity')
     const notebedDeleteBtn=document.getElementById('notebed-nav-btn-delete')
     const notebedCloseBtn=document.getElementById('notebed-nav-btn-close')
@@ -114,10 +248,12 @@
         
         // load XYWH
         const XYWH=JSON.parse(localStorage.getItem(STORAGE_KEY_XYWH));
-        notebedContainer.style.left=XYWH.x;
-        notebedContainer.style.top=XYWH.y;
+        notebedContainer.style.left=Math.max(parseInt(XYWH.x,10),10)+"px";
+        notebedContainer.style.top=Math.max(parseInt(XYWH.y,10),10)+"px";
         notebedContainer.style.width=XYWH.w;
         notebedContainer.style.height=XYWH.h;
+
+        saveNotebedXYWH();
     }
 
     function saveNotebedNote()
