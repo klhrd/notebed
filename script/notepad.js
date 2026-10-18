@@ -46,7 +46,8 @@ body
     resize: both;
     overflow: hidden;
 
-    min-width: 51px;
+    box-sizing: content-box;
+    min-width: 50px;
     min-height: 25px;
 
     font-family: Arial, Helvetica, sans-serif;
