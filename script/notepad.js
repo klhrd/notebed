@@ -16,15 +16,11 @@
     // style
     const style=document.createElement('style');
     style.textContent=
-        `
-body
+        `    
+#notebed-container
 {
     font-family: Arial, Helvetica, sans-serif;
     text-align: center;
-}
-
-#notebed-container
-{
     width: 200px;
     height: 200px;
     
