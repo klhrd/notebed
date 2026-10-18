@@ -3,148 +3,29 @@
     <head>
         <meta charset="UTF-8">
         <title>notebed</title>
-        <style>
-body
-{
-    font-family: Arial, Helvetica, sans-serif;
-    text-align: center;
-}
-
-#notebed-container
-{
-    width: 200px;
-    height: 200px;
-    
-    position: fixed;
-    left: 10px;
-    top: 10px;
-    
-    border: 0px solid #888888;
-    border-radius: 10px;
-    background-color: #f0f0f0;
-    
-    z-index: 99999;
-    
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-    padding: 5px;
-
-    resize: both;
-    overflow: hidden;
-
-    min-width: 51px;
-    min-height: 25px;
-
-    font-family: Arial, Helvetica, sans-serif;
-    text-align: left;
-}
-
-#notebed-nav
-{
-    flex: 0 0 auto;
-
-    background-color: #fafafa;
-    border-radius: 5px;
-    
-    display: flex;
-    justify-content: end;
-    align-items: center;
-
-    overflow: hidden;
-}
-
-.notebed-nav-btn
-{
-    border: none;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    
-    background-color: #00000000;
-    user-select: none;
-    height: 1.6rem;
-    width: 1.6rem;
-    border-radius: 50%;
-    
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-.notebed-nav-btn>span
-{
-    font-size: 20px;
-}
-
-.notebed-nav-btn:hover
-{
-    background-color: #88888830;
-}
-
-#notebed-nav-btn-drag
-{
-    cursor: grab;
-}
-
-#notebed-note
-{
-    border-radius: 5px;
-
-    background-color: #fafafa;
-    height: 100%;
-    
-    flex: 1 1 auto;
-
-    overflow-y: auto;
-    outline: none;
-
-    padding: 2px;
-
-    position: relative;
-
-}
-
-#notebed-note::-webkit-scrollbar{width: 12px;}
-#notebed-note::-webkit-scrollbar-button{display: none;}
-#notebed-note::-webkit-scrollbar-corner{display: none;}
-#notebed-note::-webkit-scrollbar-track{visibility: hidden;}
-#notebed-note::-webkit-scrollbar-thumb
-{
-    background-color: #e8e8e8;
-    border-radius: 6px;
-    border: 4px solid #00000000;
-    background-clip: padding-box;
-}
-#notebed-note::-webkit-scrollbar-thumb:hover
-{
-    background-color: #d8d8d8;
-}
-
-
-#notebed-note.notebed-note-empty::before
-{
-    content: "take notes here... ";
-    cursor: text;
-
-    color: #00000080;
-    position: absolute;
-
-    pointer-events: none;
-}
-
-
-        </style>
+        <link rel="stylesheet" href="./style.css"></link>
     </head>
     <body>
-        <h1>TEST</h1>
-        <a href="
-            javascript:(function()
-            {
-                const s=document.createElement('script');
-                s.src='http://127.0.0.1:5500/bookmarklet.js';
-                document.body.appendChild(s);
-            })();
-        ">run</a>
+        <div class="single-page" id="home">
+            <div class="title">ℕ𝕆𝕋𝔼𝔹𝔼𝔻</div>
+            <div class="sub-title">a bookmarklet about note</div>
+        </div>
+
+        <div>
+            <div class="card">
+                <div class="card-title">Notepad</div>
+                <a href="
+                javascript:(function()
+                {
+                    const s=document.createElement('script');
+                    s.src='http://127.0.0.1:5500/script/notepad.js';
+                    document.body.appendChild(s);
+                })();
+            ">here</a>
+            </div>
+            
+        </div>
+        
 
         <script>
             window.addEventListener("load",
