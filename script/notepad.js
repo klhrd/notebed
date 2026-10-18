@@ -247,7 +247,7 @@ body
         updateNotebedOpacity();
         
         // load XYWH
-        const XYWH=JSON.parse(localStorage.getItem(STORAGE_KEY_XYWH));
+        const XYWH=JSON.parse(localStorage.getItem(STORAGE_KEY_XYWH))||{x:"10px",y:"10px",w:"200px",h:"200px"};
         notebedContainer.style.left=Math.max(parseInt(XYWH.x,10),10)+"px";
         notebedContainer.style.top=Math.max(parseInt(XYWH.y,10),10)+"px";
         notebedContainer.style.width=XYWH.w;
