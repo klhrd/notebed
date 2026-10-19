@@ -1,179 +1,193 @@
 (function()
 {
-    if(document.getElementById('notebed-note'))return;
+    if(document.getElementById('notebed-notepad'))return;
 
     STORAGE_KEY_CONTENT="NOTEBED_NOTE_CONTENT";
     STORAGE_KEY_XYWH="NOTEBED_XYWH";
 
-    // appeadChild ======================================================================================================================
+    const notebedNotepad=document.createElement('notebed-notepad');
+    notebedNotepad.id='notebed-notepad';
+    document.body.appendChild(notebedNotepad);
+    const shadowRoot=notebedNotepad.attachShadow({mode:'open'});
 
     // link
-    const link=document.createElement('link');
-    link.rel='stylesheet';
-    link.href='https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined';
-    document.head.appendChild(link);
-
+    if(!document.querySelector('link[href*="Material+Symbols+Outlined"]'))
+    {
+        const globalLink=document.createElement('link');
+        globalLink.rel='stylesheet';
+        globalLink.href='https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined';
+        document.head.appendChild(globalLink);
+    }
+    
     // style
-    const style=document.createElement('style');
-    style.textContent=
-        `    
-#notebed-container
-{
-    font-family: Arial, Helvetica, sans-serif;
-    text-align: center;
-    width: 200px;
-    height: 200px;
-    
-    position: fixed;
-    left: 10px;
-    top: 10px;
-    
-    border: 0px solid #888888;
-    border-radius: 10px;
-    background-color: #f0f0f0;
-    
-    z-index: 99999;
-    
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-    padding: 5px;
+    shadowRoot.innerHTML=`
+<style>
+    .material-symbols-outlined
+    {
+        font-family: 'Material Symbols Outlined';
+        font-weight: normal;
+        font-style: normal;
+        font-size: 24px;
+        line-height: 1;
+        display: inline-block;
+        white-space: nowrap;
+        -webkit-font-smoothing: antialiased;
+    }
 
-    resize: both;
-    overflow: hidden;
+    #notebed-container
+    {
+        all: initial; 
 
-    box-sizing: content-box;
-    min-width: 50px;
-    min-height: 25px;
-
-    font-family: Arial, Helvetica, sans-serif;
-    text-align: left;
-}
-
-#notebed-nav
-{
-    flex: 0 0 auto;
-
-    background-color: #fafafa;
-    border-radius: 5px;
-    
-    display: flex;
-    justify-content: end;
-    align-items: center;
-
-    overflow: hidden;
-}
-
-#notebed-nav-title:hover
-{
-    cursor: grab;
-}
-
-.notebed-nav-btn
-{
-    border: none;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    
-    background-color: #00000000;
-    user-select: none;
-    height: 1.6rem;
-    width: 1.6rem;
-    border-radius: 50%;
-    
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-.notebed-nav-btn>span
-{
-    font-size: 20px;
-}
-
-.notebed-nav-btn:hover
-{
-    background-color: #88888830;
-    cursor: pointer;
-}
-
-#notebed-nav-btn-drag
-{
-    cursor: grab;
-}
-
-#notebed-note
-{
-    border-radius: 5px;
-
-    background-color: #fafafa;
-    height: 100%;
-    
-    flex: 1 1 auto;
-
-    overflow-y: auto;
-    outline: none;
-
-    padding: 2px;
-
-    position: relative;
-
-}
-
-#notebed-note::-webkit-scrollbar{width: 12px;}
-#notebed-note::-webkit-scrollbar-button{display: none;}
-#notebed-note::-webkit-scrollbar-corner{display: none;}
-#notebed-note::-webkit-scrollbar-track{visibility: hidden;}
-#notebed-note::-webkit-scrollbar-thumb
-{
-    background-color: #e8e8e8;
-    border-radius: 6px;
-    border: 4px solid #00000000;
-    background-clip: padding-box;
-}
-#notebed-note::-webkit-scrollbar-thumb:hover
-{
-    background-color: #d8d8d8;
-}
-
-
-#notebed-note.notebed-note-empty::before
-{
-    content: "take notes here... ";
-    cursor: text;
-
-    color: #00000080;
-    position: absolute;
-
-    pointer-events: none;
-}
-        `;
-    document.head.appendChild(style);
-
-    // notebed
-    const notebedContainer=document.createElement('div');
-    notebedContainer.id="notebed-container";
-    notebedContainer.innerHTML=
-        `
-            <div id="notebed-nav">
-                <span id="notebed-nav-title" style="margin-right: auto; padding: 3px; user-select: none;">ℕ𝕆𝕋𝔼𝔹𝔼𝔻</span>
-                <button class="notebed-nav-btn" id="notebed-nav-btn-delete"><span class="material-symbols-outlined">delete</span></button>
-                <button class="notebed-nav-btn" id="notebed-nav-btn-opacity"><span class="material-symbols-outlined">visibility</span></button>
-                <button class="notebed-nav-btn" id="notebed-nav-btn-close"><span class="material-symbols-outlined">close</span></button>
-            </div>
-            <div id="notebed-note" contenteditable="true">
-            </div>
+        font-family: Arial, Helvetica, sans-serif;
+        text-align: center;
+        width: 200px;
+        height: 200px;
         
-        `;
-    document.body.appendChild(notebedContainer);
+        position: fixed;
+        left: 10px;
+        top: 10px;
+        
+        border: 0px solid #888888;
+        border-radius: 10px;
+        background-color: #f0f0f0;
+        box-shadow: 0px 0px 3px 1px #00000050;
+        
+        z-index: 99999;
+        
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        padding: 5px;
 
+        resize: both;
+        overflow: hidden;
+
+        box-sizing: content-box;
+        min-width: 50px;
+        min-height: 25px;
+
+        font-family: Arial, Helvetica, sans-serif;
+        text-align: left;
+    }
+
+    #notebed-nav
+    {
+        flex: 0 0 auto;
+
+        background-color: #fafafa;
+        border-radius: 5px;
+        
+        display: flex;
+        justify-content: end;
+        align-items: center;
+
+        overflow: hidden;
+    }
+
+    #notebed-nav-title:hover
+    {
+        cursor: grab;
+    }
+
+    .notebed-nav-btn
+    {
+        border: none;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        
+        background-color: #00000000;
+        user-select: none;
+        height: 1.6rem;
+        width: 1.6rem;
+        border-radius: 50%;
+        
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .notebed-nav-btn>span
+    {
+        font-size: 20px;
+    }
+
+    .notebed-nav-btn:hover
+    {
+        background-color: #88888830;
+        cursor: pointer;
+    }
+
+    #notebed-nav-btn-drag
+    {
+        cursor: grab;
+    }
+
+    #notebed-note
+    {
+        border-radius: 5px;
+        /* background-color: #fafafa00; */
+        background-color: #fafafa;
+        height: 100%;
+        
+        flex: 1 1 auto;
+
+        overflow-y: auto;
+        outline: none;
+
+        padding: 2px;
+
+        position: relative;
+
+    }
+
+    #notebed-note::-webkit-scrollbar{width: 4px;}
+    #notebed-note::-webkit-scrollbar-button{display: none;}
+    #notebed-note::-webkit-scrollbar-corner{display: none;}
+    #notebed-note::-webkit-scrollbar-track{visibility: hidden;}
+    #notebed-note::-webkit-scrollbar-thumb
+    {
+        background-color: #e0e0e0;
+        border-radius: 6px;
+        border: 0px solid #00000000;
+        background-clip: padding-box;
+        padding: 10px;
+    }
+    #notebed-note::-webkit-scrollbar-thumb:hover
+    {
+        background-color: #d0d0d0;
+    }
+
+
+    #notebed-note.notebed-note-empty::before
+    {
+        content: "take notes here... ";
+        cursor: text;
+
+        color: #00000080;
+        position: absolute;
+
+        pointer-events: none;
+    }
+</style>
+
+<div id="notebed-container">
+    <div id="notebed-nav">
+        <span id="notebed-nav-title" style="margin-right: auto; padding: 3px; user-select: none;">ℕ𝕆𝕋𝔼𝔹𝔼𝔻</span>
+        <button class="notebed-nav-btn" id="notebed-nav-btn-delete"><span class="material-symbols-outlined">delete</span></button>
+        <button class="notebed-nav-btn" id="notebed-nav-btn-opacity"><span class="material-symbols-outlined">visibility</span></button>
+        <button class="notebed-nav-btn" id="notebed-nav-btn-close"><span class="material-symbols-outlined">close</span></button>
+    </div>
+    <div id="notebed-note" contenteditable="true"></div>
+</div>
+`;
 
     // addEventListener =====================================================================================================================
-    const notebedNote=document.getElementById('notebed-note');
-    const notebedDragger=document.getElementById('notebed-nav-title');
-    const notebedOpacityBtn=document.getElementById('notebed-nav-btn-opacity')
-    const notebedDeleteBtn=document.getElementById('notebed-nav-btn-delete')
-    const notebedCloseBtn=document.getElementById('notebed-nav-btn-close')
+    const notebedContainer=shadowRoot.getElementById('notebed-container');
+    const notebedDragger=shadowRoot.getElementById('notebed-nav-title');
+    const notebedOpacityBtn=shadowRoot.getElementById('notebed-nav-btn-opacity');
+    const notebedDeleteBtn=shadowRoot.getElementById('notebed-nav-btn-delete');
+    const notebedCloseBtn=shadowRoot.getElementById('notebed-nav-btn-close');
+    const notebedNote=shadowRoot.getElementById('notebed-note');
 
     //drag
     let isDragging=false;
@@ -188,14 +202,14 @@
         notebedDragger.style.cursor='grabbing';
     });
 
-    document.addEventListener('mousemove',(e)=>
+    window.addEventListener('mousemove',(e)=>
     {
         if(!isDragging)return;
         notebedContainer.style.left=e.clientX-offsetX+'px';
         notebedContainer.style.top=e.clientY-offsetY+'px';
     });
 
-    document.addEventListener('mouseup',()=>
+    window.addEventListener('mouseup',()=>
     {
         isDragging=false;
         notebedDragger.style.cursor='grab';
@@ -225,7 +239,7 @@
     notebedCloseBtn.addEventListener('click',(e)=>
     {
         e.stopPropagation();
-        notebedContainer.remove();
+        notebedNotepad.remove();
         saveNotebedXYWH();
     });
 
