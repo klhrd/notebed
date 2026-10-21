@@ -11,30 +11,43 @@
             <div class="sub-title">a bookmarklet about note</div>
         </div>
 
-        <div>
-            <div class="card">
-                <div class="card-title">Notepad</div>
-                <a href="
-                javascript:(function()
-                {
-                    const s=document.createElement('script');
-                    s.src='http://127.0.0.1:5500/script/notepad.js';
-                    document.body.appendChild(s);
-                })();
-            ">here</a>
+        <div class="card-box">
+            <div class="card" id="notepad-card">
+                <div class="card-title">
+                    <a href="">Notepad</a>
+                </div>
             </div>
             
+            <div class="card" id="b-card">
+                <div class="card-title">
+                    <a href="">b</a>
+                </div>
+            </div>
+
+            <div class="card" id="c-card">
+                <div class="card-title">
+                    <a href="">c</a>
+                </div>
+            </div>
+            <div class="card" id="c-card">
+                <div class="card-title">
+                    <a href="">c</a>
+                </div>
+            </div>
+            <div class="card" id="c-card">
+                <div class="card-title">
+                    <a href="">c</a>
+                </div>
+            </div>
+            <div class="card" id="c-card">
+                <div class="card-title">
+                    <a href="">c</a>
+                </div>
+            </div>
+
         </div>
         
 
-        <script>
-            window.addEventListener("load",
-                function()
-                {
-                    const s=document.createElement('script');
-                    s.src='http://127.0.0.1:5500/bookmarklet.js';
-                    document.body.appendChild(s);
-                });
-        </script>
+        <script src="script.js"></script>
     </body>
 </html>
