@@ -2,6 +2,25 @@
 {
     if(document.getElementById('notebed-notepad'))return;
 
+    let htmlPolicy;
+    if(window.trustedTypes&&window.trustedTypes.createPolicy)
+    {
+        try
+        {
+            htmlPolicy=window.trustedTypes.createPolicy('notebedPolicy',
+            {
+                createHTML:(string)=>string
+            });
+        }
+        catch(e)
+        {
+            if(window.trustedTypes.defaultPolicy)
+            {
+                htmlPolicy=window.trustedTypes.defaultPolicy;
+            }
+        }
+    }
+
     STORAGE_KEY_CONTENT="NOTEBED_NOTE_CONTENT";
     STORAGE_KEY_XYWH="NOTEBED_XYWH";
 
@@ -22,6 +41,13 @@
     // style
     shadowRoot.innerHTML=`
 <style>
+    @font-face {
+        font-family: 'Material Symbols Outlined';
+        font-style: normal;
+        font-weight: 400;
+        src: url(https://gstatic.com) format('truetype');
+    }
+
     .material-symbols-outlined
     {
         font-family: 'Material Symbols Outlined';
@@ -82,6 +108,7 @@
         align-items: center;
 
         overflow: hidden;
+        color: #000000;
     }
 
     #notebed-nav-title:hover
@@ -109,6 +136,7 @@
     .notebed-nav-btn>span
     {
         font-size: 20px;
+        color: #000000;
     }
 
     .notebed-nav-btn:hover
