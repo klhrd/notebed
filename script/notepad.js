@@ -1,6 +1,32 @@
 (function()
 {
-    if(document.getElementById('notebed-notepad'))return;
+    let notebedNotepadStyle="light-icons";
+    const COLORS=
+    {
+        bgGap: '#f0f0f0',
+        bgDefault: '#fafafa',
+
+        textDefault: '#000000',
+        textMuted: '#808080',
+
+        scrollbarThumb: '#e0e0e0',
+        scrollbarThumbHover: '#d0d0d0'
+    }
+    
+    if(document.getElementById('notebed-notepad'))
+    {
+        const notebedNotepad=document.getElementById('notebed-notepad');
+        
+        if(notebedNotepad.dataset.style==notebedNotepadStyle)
+        {
+            notebedNotepad.remove();
+            return;
+        }
+        else
+        {
+            notebedNotepad.dataset.style=notebedNotepadStyle;
+        }
+    }
 
     let htmlPolicy;
     if(window.trustedTypes&&window.trustedTypes.createPolicy)
@@ -26,6 +52,7 @@
 
     const notebedNotepad=document.createElement('notebed-notepad');
     notebedNotepad.id='notebed-notepad';
+    notebedNotepad.dataset.style="light-icons";
     document.body.appendChild(notebedNotepad);
     const shadowRoot=notebedNotepad.attachShadow({mode:'open'});
 
@@ -73,9 +100,8 @@
         left: 10px;
         top: 10px;
         
-        border: 0px solid #888888;
         border-radius: 10px;
-        background-color: #f0f0f0;
+        background-color: ${COLORS.bgGap};
         box-shadow: 0px 0px 3px 1px #00000050;
         
         z-index: 99999;
@@ -100,7 +126,7 @@
     {
         flex: 0 0 auto;
 
-        background-color: #fafafa;
+        background-color: ${COLORS.bgDefault};
         border-radius: 5px;
         
         display: flex;
@@ -108,7 +134,7 @@
         align-items: center;
 
         overflow: hidden;
-        color: #000000;
+        color: ${COLORS.textDefault};
     }
 
     #notebed-nav-title:hover
@@ -136,7 +162,7 @@
     .notebed-nav-btn>span
     {
         font-size: 20px;
-        color: #000000;
+        color: ${COLORS.textDefault};
     }
 
     .notebed-nav-btn:hover
@@ -153,8 +179,7 @@
     #notebed-note
     {
         border-radius: 5px;
-        /* background-color: #fafafa00; */
-        background-color: #fafafa;
+        background-color: ${COLORS.bgDefault};
         height: 100%;
         
         flex: 1 1 auto;
@@ -174,7 +199,7 @@
     #notebed-note::-webkit-scrollbar-track{visibility: hidden;}
     #notebed-note::-webkit-scrollbar-thumb
     {
-        background-color: #e0e0e0;
+        background-color: ${COLORS.scrollbarThumb};
         border-radius: 6px;
         border: 0px solid #00000000;
         background-clip: padding-box;
@@ -182,7 +207,7 @@
     }
     #notebed-note::-webkit-scrollbar-thumb:hover
     {
-        background-color: #d0d0d0;
+        background-color: ${COLORS.scrollbarThumbHover};
     }
 
 
@@ -191,7 +216,7 @@
         content: "take notes here... ";
         cursor: text;
 
-        color: #00000080;
+        color: ${COLORS.scrollbarThumbHover};
         position: absolute;
 
         pointer-events: none;
@@ -267,8 +292,8 @@
     notebedCloseBtn.addEventListener('click',(e)=>
     {
         e.stopPropagation();
-        notebedNotepad.remove();
         saveNotebedXYWH();
+        notebedNotepad.remove();
     });
 
     // note input
