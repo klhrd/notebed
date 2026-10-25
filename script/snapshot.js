@@ -51,7 +51,6 @@
         }
     }
 
-    const STORAGE_KEY_CONTENT="NOTEBED_SNAPSHOT_NOTE_CONTENT";
     const STORAGE_KEY_XYWHT="NOTEBED_SNAPSHOT_XYWHT";
 
     const notebedSnapshot=document.createElement('notebed-snapshot');
@@ -230,7 +229,7 @@
     #notebed-shot
     {
         border-radius: 5px;
-        background-color: var(--bg-default);
+        background-color: #00000000;
         box-shadow: 0px 0px 3px 1px #00000050 inset;
         transition: background-color ease 0.3s;
         height: 100%;
@@ -266,7 +265,7 @@
 <div id="notebed-container">
     <div id="notebed-nav">
         <span id="notebed-nav-title" style="margin-right: auto; padding: 3px; user-select: none;">ℕ𝕆𝕋𝔼𝔹𝔼𝔻</span>
-        <button class="notebed-nav-btn" id="notebed-nav-btn-add"><span class="material-symbols-outlined">add</span></button>
+        <button class="notebed-nav-btn" id="notebed-nav-btn-add"><span class="material-symbols-outlined">screenshot_region</span></button>
         <button class="notebed-nav-btn" id="notebed-nav-btn-theme"><span class="material-symbols-outlined">light_mode</span></button>
         <button class="notebed-nav-btn" id="notebed-nav-btn-opacity"><span class="material-symbols-outlined">visibility</span></button>
         <button class="notebed-nav-btn" id="notebed-nav-btn-close"><span class="material-symbols-outlined">close</span></button>
@@ -350,13 +349,14 @@
                 captureArea();
                 isShotted=true;
                 notebedShot.style.boxShadow='none';
-                
+                notebedAddBtn.firstElementChild.textContent='delete';
             }
             else
             {
-                notebedShot.firstChild.remove();
+                notebedShot.firstElementChild.remove();
                 isShotted=false;
                 notebedShot.style.boxShadow='0px 0px 3px 1px #00000050 inset';
+                notebedAddBtn.firstElementChild.textContent='screenshot_region';
             }
             saveNotebedXYWHT();
         });
@@ -381,12 +381,14 @@
             {
                 useCORS: true,
                 allowTaint: true,
-                scrollX: 0,
-                scrollY: 0,
+                scrollX: window.scrollX,
+                scrollY: window.scrollY,
                 x: window.scrollX,
                 y: window.scrollY,
                 width: window.innerWidth,
-                height: window.innerHeight
+                height: window.innerHeight,
+                windowWidth: document.documentElement.clientWidth,
+                windowHeight: document.documentElement.clientHeight
             }
         ).then(canvas=>
             {

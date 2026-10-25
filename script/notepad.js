@@ -5,7 +5,7 @@
     let theme='light';
     let COLORS=
     {
-        bgGap: '#ff0000',
+        bgGap: '#f0f0f0',
         bgDefault: '#fafafa',
 
         textDefault: '#000000',
@@ -51,7 +51,7 @@
         }
     }
 
-    STORAGE_KEY_CONTENT="NOTEBED_NOTE_CONTENT";
+    STORAGE_KEY_CONTENT="NOTEBED_NOTEPAD_NOTE_CONTENT";
     STORAGE_KEY_XYWHT="NOTEBED_XYWHT";
 
     const notebedNotepad=document.createElement('notebed-notepad');
