@@ -1,10 +1,10 @@
-const BOOKMARKLET_LIST=["notepad"];
+const BOOKMARKLET_LIST=["notepad","snapshot"];
 
 window.addEventListener("load",()=>
 {
     const script=document.createElement('script');
-    script.src='http://127.0.0.1:5500/script/notepad.js';
-    // document.body.appendChild(script);
+    script.src='http://127.0.0.1:5500/script/eyedropper.js';
+    document.body.appendChild(script);
 });
 
 window.addEventListener('load',()=>
@@ -12,7 +12,7 @@ window.addEventListener('load',()=>
     BOOKMARKLET_LIST.forEach((bml)=>
     {
         const card=document.getElementById(bml+'-card');
-        const link=card.querySelector(':scope>*>a');
+        const link=card.querySelector(':scope a');
         
         if(!link)
         {
