@@ -14,7 +14,8 @@
 *
 {
     box-sizing: border-box;
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: "Marcellus", 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif, serif;
+    font-weight: 350;
 }
 
 body
@@ -27,7 +28,7 @@ body
     min-height: 100dvh;
     width: 100%;
 
-    background-color: #e8f0ff;
+    background-color: #fcfdff;
 }
 
 body::-webkit-scrollbar{width: 6px;}
@@ -53,6 +54,25 @@ body::-webkit-scrollbar-thumb:hover
     flex-direction: column;
     justify-content: center;
     align-items: center;
+
+}
+
+#home
+{
+    font-size: 5rem;
+
+}
+
+.title
+{
+    font-size: 2em;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
+.sub-title
+{
+    font-size: 1em;
+    font-weight: 100;
 }
 
 .card-box
@@ -71,27 +91,58 @@ body::-webkit-scrollbar-thumb:hover
 
 .card
 {
-    background-color: #e0e8f8;
-    border-radius: 10px;
+    box-shadow: 0px 0px 10px 1px #00000050;
+    
+    border-radius: 20px;
     
     display: flex;
-    flex-direction: column;
-    gap: 10px;
+    flex-direction: row;
+    gap: 8%;
     justify-content: center;
     align-items: center;
 
     padding: 15px;
-    height: 250px;
-    width: 200px;
+    height: 500px;
+    width: 800px;
 
-    animation: fade-in auto lineare;
-    animation-timeline: view();
-    animation-range: entry 20% cover 80%;
+    font-size: 1.5rem;
 }
 
-.card-title
+.card-img
 {
-    font-size: 1.2rem;
+    width: 45%;
+    box-shadow: 0 0 10px 5px #00000000;
+    border-radius: 10px;
+    overflow: hidden;
+}
+.card-info
+{
+    width: 45%;
+    display: flex;
+    flex-direction: column;
+}
+
+.card-info-title
+{
+    font-size: 2em;
     font-weight: 700;
-    
+    font-family: 'Times New Roman', Times, serif;
+    font-style: italic;
+    margin-bottom: 15px;
+}
+
+.card-info-title>a
+{
+    font-family: 'Times New Roman', Times, serif;
+    text-decoration: none;
+    color: #01080f;
+    border-bottom: #000000 1.5px solid;
+    padding-bottom: -20px;
+}
+
+.card-info-sub-title
+{
+    font-weight: 200;
+    color: #808080;
+    margin-left: 3px;
 }

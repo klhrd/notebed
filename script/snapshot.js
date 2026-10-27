@@ -186,6 +186,11 @@
         transition: color ease 0.3s;
     }
 
+    #notebed-nav-title
+    {
+        font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    }
+    
     #notebed-nav-title:hover
     {
         cursor: grab;

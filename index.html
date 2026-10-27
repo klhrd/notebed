@@ -4,50 +4,70 @@
         <meta charset="UTF-8">
         <title>notebed</title>
         <link rel="stylesheet" href="./style.css"></link>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Encode+Sans+Semi+Expanded:wght@100;200;300;400;500;600;700;800;900&family=Marcellus&display=swap" rel="stylesheet">
     </head>
     <body>
         <div class="single-page" id="home">
             <div class="title">ℕ𝕆𝕋𝔼𝔹𝔼𝔻</div>
-            <div class="sub-title">a bookmarklet about note</div>
+            <div class="sub-title">a bookmarklet collection</div>
         </div>
 
-        <div class="card-box">
+        <div class="card-box single-page">
             <div class="card" id="notepad-card">
-                <div class="card-title">
-                    <a href="">Notepad</a>
+                <div class="card-img">
+                    <img src="public/img/notepad.png" width="100%"/>
+                </div>
+                <div class="card-info">
+                    <div class="card-info-title">
+                        <a href="">NOTEPAD</a>
+                    </div>
+                    <div class="card-info-sub-title">take some notes...</div>
+                    <ul>
+                        <li>btns: </span>
+                        <ul>
+                            <li>delete all</li>
+                            <li>light/dark theme</li>
+                            <li>opacity</li>
+                            <li>close</li>
+                        </ul>
+                        <li>save to local storage</li>
+                        <li>resizeable & moveable</li>
+                    </ul>
                 </div>
             </div>
-            
-            <div class="card" id="b-card">
-                <div class="card-title">
-                    <a href="">b</a>
-                </div>
-            </div>
-
-            <div class="card" id="c-card">
-                <div class="card-title">
-                    <a href="">c</a>
-                </div>
-            </div>
-            <div class="card" id="c-card">
-                <div class="card-title">
-                    <a href="">c</a>
-                </div>
-            </div>
-            <div class="card" id="c-card">
-                <div class="card-title">
-                    <a href="">c</a>
-                </div>
-            </div>
-            <div class="card" id="c-card">
-                <div class="card-title">
-                    <a href="">c</a>
-                </div>
-            </div>
-
         </div>
-        
+
+        <div class="card-box single-page">
+            <div class="card" id="snapshot-card">
+                <div class="card-img">
+                    <img src="public/img/snapshot.png" width="100%"/>
+                </div>
+                <div class="card-info">
+                    <div class="card-info-title">
+                        <a href="">SNAPSHOT</a>
+                    </div>
+                    <div class="card-info-sub-title">take a shot...</div>
+                    <ul>
+                        <li>btns: </span>
+                        <ul>
+                            <li>shot/delete</li>
+                            <li>light/dark theme</li>
+                            <li>opacity</li>
+                            <li>close</li>
+                        </ul>
+                        <li>glass texture</li>
+                        <li>resizeable & moveable</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+            
+
+        <div class="single-page">        
 
         <script src="script.js"></script>
     </body>
 </html>
+
