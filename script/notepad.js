@@ -52,7 +52,7 @@
     }
 
     STORAGE_KEY_CONTENT="NOTEBED_NOTEPAD_NOTE_CONTENT";
-    STORAGE_KEY_XYWHT="NOTEBED_XYWHT";
+    STORAGE_KEY_XYWHT="NOTEBED_NOTEPAD_XYWHT";
 
     const notebedNotepad=document.createElement('notebed-notepad');
     notebedNotepad.id='notebed-notepad';
