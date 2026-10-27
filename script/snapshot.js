@@ -480,7 +480,7 @@
             COLORS=
             {
                 bgGap: '#f0f0f0',
-                bgDefault: '#fafafa50',
+                bgDefault: '#fafafaa0',
 
                 textDefault: '#000000',
                 textMuted: '#808080',
@@ -495,7 +495,7 @@
             COLORS=
             {
                 bgGap: '#141414',
-                bgDefault: '#20202050',
+                bgDefault: '#202020a0',
 
                 textDefault: '#fafafa',
                 textMuted: '#808080',

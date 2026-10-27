@@ -230,6 +230,7 @@
         
         flex: 1 1 auto;
 
+        overflow-x: hidden;
         overflow-y: auto;
         outline: none;
 
