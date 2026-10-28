@@ -14,13 +14,18 @@
             <div class="sub-title">a bookmarklet collection</div>
         </div>
 
+        <div class="single-page" id="home" style="display: flex; align-items: top; justify-content: center; gap: 30px;">
+            <div style="font-size: 3rem; max-width: 80%; margin-right: 20%;">What is a <br><span style="font-style: italic; font-weight: 800; font-size: 1.5em;">BOOKMARKLET</span> ?</div>
+            <div style="font-weight: 200; font-size: 2rem; max-width: 80%; margin-left: 15%;">A bookmarklet is a browser bookmark <br>containing JavaScript code that adds one-click features or <br>functionality to a webpage.</div>
+        </div>
+
         <div class="card-box single-page">
             <div class="card" id="notepad-card">
                 <div class="card-img">
                     <img src="public/img/notepad.png" width="100%"/>
                 </div>
                 <div class="card-info">
-                    <div class="card-info-title">
+                    <div class="card-info-title" data-tooltip="click or drag this link to your bookmarks bar">
                         <a href="">NOTEPAD</a>
                     </div>
                     <div class="card-info-sub-title">take some notes...</div>
@@ -45,7 +50,7 @@
                     <img src="public/img/snapshot.png" width="100%"/>
                 </div>
                 <div class="card-info">
-                    <div class="card-info-title">
+                    <div class="card-info-title" data-tooltip="click or drag this link to your bookmarks bar">
                         <a href="">SNAPSHOT</a>
                     </div>
                     <div class="card-info-sub-title">take a shot...</div>
@@ -63,9 +68,6 @@
                 </div>
             </div>
         </div>
-            
-
-        <div class="single-page">        
 
         <script src="script.js"></script>
     </body>

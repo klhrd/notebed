@@ -4,7 +4,7 @@ window.addEventListener("load",()=>
 {
     const script=document.createElement('script');
     script.src='http://127.0.0.1:5500/script/eyedropper.js';
-    document.body.appendChild(script);
+    //document.body.appendChild(script);
 });
 
 window.addEventListener('load',()=>

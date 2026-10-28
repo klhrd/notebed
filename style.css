@@ -129,6 +129,7 @@ body::-webkit-scrollbar-thumb:hover
     font-family: 'Times New Roman', Times, serif;
     font-style: italic;
     margin-bottom: 15px;
+    position: relative;
 }
 
 .card-info-title>a
@@ -138,7 +139,41 @@ body::-webkit-scrollbar-thumb:hover
     color: #01080f;
     border-bottom: #000000 1.5px solid;
     padding-bottom: -20px;
+    transition: all 0.2s ease;
 }
+
+.card-info-title>a:hover
+{
+    text-shadow: 2px 2px 5px  #00000050;
+    translate: -10px -10px;
+}
+
+.card-info-title::after
+{
+    content: attr(data-tooltip);
+    position: absolute;
+    bottom: 105%;
+    left: +34%;
+    transform: translateX(-50%);
+
+    background-color: #00000000;
+    color: #555555e0;
+    padding: 6px 10px;
+    font-size: 0.3em;
+    white-space: nowrap;
+
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.2s ease;
+
+}
+
+.card-info-title:hover::after
+{
+    opacity: 1;
+    visibility: visible;
+}
+
 
 .card-info-sub-title
 {
